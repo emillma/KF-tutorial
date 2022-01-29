@@ -10,7 +10,9 @@ r: measurement covariance (if we konw mean)
 s: measurement covariance (if we use h@x as estimate of mean)
 k: kalman gain
 """
-random_gaussian = multivariate_normal.rvs  # just a renaming
+
+# just a renaming of function to get random gaussian value
+random_gaussian = multivariate_normal.rvs
 
 # lists to store data
 x_gt_seq = []
@@ -28,19 +30,22 @@ x_k_gt = 1
 p_est = 10**2
 x_est = 0
 for i in range(1000):
-    x_k_gt = x_k_gt + random_gaussian(0, q)
-    z = x_k_gt + random_gaussian(0, r)
+    x_k_gt = x_k_gt + random_gaussian(0, q)  # true position
+    z = x_k_gt + random_gaussian(0, r)  # measurement
 
-    x_pred = x_est
-    p_pred = p_est + q
+    x_pred = x_est  # predicted state estimate
+    p_pred = p_est + q  # predicted estimate covariance
 
-    z_pred = x_pred
-    s = p_est + r
-    k = p_est * (1/s)
-    innovation = z - z_pred
+    z_pred = x_pred  # predicted measurement
+    innovation = z - z_pred  # innovation
 
-    x_est = x_est + k * innovation
-    p_est = (1-k)*p_pred
+    # Innovation covariance (same as predicted measurement covariance)
+    s = p_est + r  # innovation
+
+    k = p_est * (1/s)  # compute the calman gain
+
+    x_est = x_est + k * innovation  # get the updated state
+    p_est = (1-k)*p_pred  # get the updated covriance
 
     x_gt_seq.append(x_k_gt)
     z_seq.append(z)

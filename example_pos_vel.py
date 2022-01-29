@@ -51,10 +51,11 @@ for i in range(1000):
 
     # Innovation covariance (same as predicted measurement covariance)
     S = H @ P_est @ H.T + R
-    K = P_est @ H.T @ np.linalg.inv(S)
 
-    x_est = x_pred + K @ innovation
-    P_est = (np.eye(2) - K @ H) @ P_pred
+    K = P_est @ H.T @ np.linalg.inv(S)  # compute the calman gain
+
+    x_est = x_pred + K @ innovation  # get the updated state
+    P_est = (np.eye(2) - K @ H) @ P_pred  # get the updated covriance
 
     x_gt_seq.append(x_gt)
     x_est_seq.append(x_est)
