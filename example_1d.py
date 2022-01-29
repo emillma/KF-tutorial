@@ -1,6 +1,5 @@
 import numpy as np
 from scipy.stats import multivariate_normal
-from numpy.random import normal
 from matplotlib import pyplot as plt
 """
 x: state
