@@ -63,7 +63,7 @@ for i in range(1000):
     P_seq.append(P_est)
     K_seq.append(K)
 
-fig, ax = plt.subplots(5, 1)
+fig, ax = plt.subplots(5, 1, figsize=(10, 8))
 ax[0].plot([x[0] for x in x_gt_seq], label='pos_gt')
 ax[0].plot([x[0] for x in x_est_seq], label='pos_est')
 ax[1].plot([x[1] for x in x_gt_seq], label='vel_gt')

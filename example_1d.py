@@ -33,19 +33,26 @@ for i in range(1000):
     x_k_gt = x_k_gt + random_gaussian(0, q)  # true position
     z = x_k_gt + random_gaussian(0, r)  # measurement
 
-    x_pred = x_est  # predicted state estimate
-    p_pred = p_est + q  # predicted estimate covariance
+    # what is the prediction if we assume a stationary process (f=1, b=0)?
+    x_pred = np.nan  # TODO predicted state estimate
 
-    z_pred = x_pred  # predicted measurement
+    # what is the predicted uncertainty assuming stationary process (f=1)?
+    p_pred = np.nan  # TODO predicted estimate covariance
+
+    # what is the predicted measurement assuming h=1?
+    z_pred = np.nan  # TODO predicted measurement
+
     innovation = z - z_pred  # innovation
 
-    # Innovation covariance (same as predicted measurement covariance)
-    s = p_est + r  # innovation
+    # what is the uncertainty of the innovation?
+    s = np.nan  # TODO Innovation covariance
 
-    k = p_est * (1/s)  # compute the calman gain
+    # compute the kalman gain (h=1)
+    k = np.nan  # TODO compute the calman gain
 
-    x_est = x_est + k * innovation  # get the updated state
-    p_est = (1-k)*p_pred  # get the updated covriance
+    # what are the new estimates?
+    x_est = np.nan  # TODO get the updated state
+    p_est = np.nan  # TODO get the updated covriance
 
     x_gt_seq.append(x_k_gt)
     z_seq.append(z)
@@ -53,7 +60,7 @@ for i in range(1000):
     x_est_seq.append(x_est)
     p_seq.append(p_est)
 
-fig, ax = plt.subplots(4, 1)
+fig, ax = plt.subplots(4, 1, figsize=(8, 8))
 ax[0].plot(x_gt_seq, label='gt')
 ax[0].plot(x_est_seq, label='x')
 ax[1].plot(z_seq, label='z')
