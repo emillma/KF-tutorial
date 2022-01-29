@@ -53,7 +53,7 @@ for i in range(1000):
     x_est_seq.append(x_est)
     p_seq.append(p_est)
 
-fig, ax = plt.subplots(4, 1)
+fig, ax = plt.subplots(4, 1, figsize=(8, 8))
 ax[0].plot(x_gt_seq, label='gt')
 ax[0].plot(x_est_seq, label='x')
 ax[1].plot(z_seq, label='z')
